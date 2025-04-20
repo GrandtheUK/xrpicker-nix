@@ -14,7 +14,13 @@
       # packages.x86_64-linux.xrpicker = import ./xr-picker.nix nixpkgs;
       # packages.x86_64-linux.default = self.packages.x86_64-linux.xrpicker;
       packages = forAllSystems (system: {
-        default = pkgs.${system}.callPackage ./. { };
+        xr-picker = pkgs.${system}.callPackage ./. { };
+        default = self.packages.${system}.xr-picker;
+      });
+      devShells = forAllSystems (system: {
+        default = pkgs.mkShell {
+          packages = [ self.packages.${system}.xr-picker ];
+        };
       });
     };
 }
