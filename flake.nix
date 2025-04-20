@@ -18,7 +18,7 @@
         default = self.packages.${system}.xr-picker;
       });
       devShells = forAllSystems (system: {
-        default = pkgs.mkShell {
+        default = pkgs.${system}.mkShell {
           packages = [ self.packages.${system}.xr-picker ];
         };
       });
